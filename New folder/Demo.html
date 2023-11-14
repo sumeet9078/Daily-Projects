@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../NIT TASK/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../NIT TASK/node_modules/bootstrap/dist/css/bootstrap.css">
+    <script type="text/javascript">
+        function bodyload(){
+            fetch("../DoheJohn/Data/product.json")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(product){
+                 document.getElementById("prodImg").src= product.Photo;
+                 document.getElementById("title").innerHTML = product.Title;
+                 document.getElementById("rating").innerHTML = `<span class="bg-success text-white p-2 rounded">${product.Rating.Rate} <span class="bi bi-star-fill"></span> </span> <span class="fw-bold ps-3">${product.Rating.Count} Ratings & ${product.Rating.Reviews} Reviews</span>`;
+                 product.Features.map(function(feature){
+                    var li = document.createElement("li");
+                    li.innerHTML = feature;
+                    document.querySelector("ul").appendChild(li);
+                 });
+                 document.getElementById("price").innerHTML = `&#8377; ${product.Price}`;
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="row mt-4">
+        <div class="col-2">
+            <img id="prodImg" width="250">
+        </div>
+        <div class="col-8 ps-4">
+            <h2 id="title"></h2>
+            <div id="rating"></div>
+            <ul id="features" class="mt-4">
+
+            </ul>
+        </div>
+        <div class="col-2">
+            <h2 id="price"></h2>
+        </div>
+    </div>
+</body>
+</html>
+<!-- <link rel="stylesheet" href="../DoheJohn/Data/product.json"> -->
